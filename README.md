@@ -1,56 +1,34 @@
-# chatLy
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Getting Started
 
-Application idea:
+First, run the development server:
 
-summary
-a chat application that allows users to join a chat room something like slack. we can create chat rooms and share URLs. Each user should provide us with an email and name to join a chat. 
+```bash
+npm run dev
+# or
+yarn dev
+```
 
-features:
-⁃list of chat rooms
-⁃joining chat rooms button
-⁃delete chat rooms button
-⁃chat room
-⁃chat room code
-⁃chat room URL
-⁃chat room text field; where the user enters their messages
-⁃chat room messages list
-⁃chat room message
-⁃exit chat room button
-⁃form for entering user information
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-Database structure
+You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-⁃user
-  ⁃id
-  ⁃userName
-  ⁃email
-  ⁃avatar
-⁃messages
-  ⁃types(IMG, videos, and emojis)
-  ⁃value(text, videos)
-  ⁃chat room id
-  ⁃user-id
-  ⁃timestamp
-⁃chat room
-  ⁃id
-  ⁃name
-  ⁃URL
-⁃chat room users
-  ⁃user-id 
-  ⁃group id
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
 
-Backend endpoints
-⁃GET /chatrooms return list of chat rooms by querying the chat room table
-⁃POST /chat room this endpoint inserts /modify in the chat room
-⁃DELETE /chatroom /id
-⁃POST /chatroom/id/join 
-⁃insert chartroom and user id into chatrooms—users table
-⁃redirects user to chat room
-⁃POST /user allow users to enter name and email
-⁃PUT user/id (modify users)
+The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-Frontend
-⁃2 pages
-⁃chat rooms
-⁃chatrooms/id
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
