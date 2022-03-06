@@ -14,9 +14,9 @@ module.exports = (sequelize, DataTypes) => {
         }
     }
     media.init({
-        id: DataTypes.INTEGER,
-        chatroomid: DataTypes.INTEGER,
-        userid: DataTypes.INTEGER,
+        id: DataTypes.UUID,
+        chatroomid: DataTypes.UUID,
+        userid: DataTypes.UUID,
         status: {
             type: DataTypes.ENUM,
             values: ['read', 'delivered']

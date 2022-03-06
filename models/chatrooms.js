@@ -14,9 +14,9 @@ module.exports = (sequelize, DataTypes) => {
         }
     }
     chatrooms.init({
-        id: DataTypes.INTEGER,
+        id: DataTypes.UUID,
         name: DataTypes.STRING,
-        createdBy: DataTypes.INTEGER,
+        createdBy: DataTypes.UUID,
     }, {
         sequelize,
         modelName: 'chatrooms',

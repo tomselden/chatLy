@@ -14,9 +14,9 @@ module.exports = (sequelize, DataTypes) => {
         }
     }
     media.init({
-        id: DataTypes.INTEGER,
-        chatroomid: DataTypes.INTEGER,
-        userid: DataTypes.INTEGER,
+        id: DataTypes.UUID,
+        chatroomid: DataTypes.UUID,
+        userid: DataTypes.UUID,
         mediaType: DataTypes.STRING,
         file: DataTypes.BLOB,
     }, {
