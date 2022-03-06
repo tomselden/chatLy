@@ -2,6 +2,7 @@
 const {
     Model
 } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
     class chatrooms extends Model {
         /**
@@ -13,10 +14,11 @@ module.exports = (sequelize, DataTypes) => {
             // define association here
         }
     }
+
     chatrooms.init({
-        id: DataTypes.UUID,
+        id: DataTypes.INTEGER,
         name: DataTypes.STRING,
-        createdBy: DataTypes.UUID,
+        createdBy: DataTypes.INTEGER,
     }, {
         sequelize,
         modelName: 'chatrooms',

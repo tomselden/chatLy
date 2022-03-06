@@ -1,7 +1,14 @@
-import Chatrooms from "../../models/chatrooms"
+// import models from "../models"
+const models = require('../models/index')
 import notFound from "./notFound"
 
-const getChatrooms = async function (req, res) {
+const Chatrooms = ChatroomsModel();
+
+console.log({
+    Chatrooms
+})
+
+export const getChatrooms = async function (req, res) {
     const { params, query } = req
 
     let chatRooms = []
@@ -32,6 +39,10 @@ const getChatrooms = async function (req, res) {
     } else {
         return notFound(res)
     }
+}
+
+export const createChatroom = (req, res) => {
+    res.status(200).json({ name: 'John Doe' })
 }
 
 export default getChatrooms

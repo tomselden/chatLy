@@ -1,17 +1,18 @@
 'use strict';
 
+const { dir } = require('console');
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
-const basename = path.basename(__filename);
+const basename = 'index.js';
 const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.js')[env];
+const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
 
 /* Custom handler for reading current working directory */
-const models = process.cwd() + '/db/models/' || __dirname;
-
+const models = process.cwd() + '/models/' || __dirname;
 let sequelize;
+
 if (config.use_env_variable) {
   sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
@@ -31,7 +32,8 @@ fs.readdirSync(models)
   })
   .forEach(file => {
     /* const model = sequelize["import"](path.join(__dirname, file)); */
-    const model = sequelize['import'](path.join(models, file));
+    // const model = sequelize['import'](path.join(models, file));
+    const model = require(path.join(models, file))(sequelize, Sequelize.DataTypes)
     db[model.name] = model;
   });
 
