@@ -44,6 +44,7 @@ CREATE TABLE IF NOT EXISTS media (
 	userId int,
 	chatroomId int,
 	mediaType valid_media_type,
+	file bytea
 	FOREIGN KEY(chatroomId) 
 	REFERENCES CHATROOM(id),
 	FOREIGN KEY(userId) 
