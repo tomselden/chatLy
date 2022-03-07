@@ -2,17 +2,22 @@
 const models = require('../db/models')
 import notFound from "./notFound"
 
+const getChatroomById = async (id) => {
+    const chatroomById = await models.chatrooms.findOne({
+        where: {
+            id
+        }
+    });
+
+    return chatroomById
+}
 
 export const getChatrooms = async function (req, res) {
     const { params, query } = req
 
     let chatRooms = []
     if (query.groupId) {
-        const chatroomById = await models.chatrooms.findOne({
-            where: {
-                id: query.groupId
-            }
-        });
+        const chatroomById = await getChatroomById(query.groupId)
         chatRooms.push(chatroomById)
     } else if (query.groupName) {
         const chatroomByName = await models.chatrooms.findAll({
@@ -37,15 +42,22 @@ export const getChatrooms = async function (req, res) {
 }
 
 export const createChatroom = async (req, res) => {
+    const { chatRoomId } = req.query
+
     try {
-        const chatroom = await models.chatrooms.create(req.body)
-        console.log({ chatroom })
-        res.json(chatroom.toJSON())
+        if (!chatRoomId) {
+            const newRoom = await models.chatrooms.create(req.body)
+            res.json(newRoom.toJSON())
+        } else {
+            const room = await getChatroomById(chatRoomId)
+            room.update(req.body)
+            const updateRoom = await room.save()
+            res.json(updateRoom.toJSON())
+        }
     } catch (error) {
         console.log({ error })
         notFound(res)
     }
-    // res.status(200).json({ name: 'John Doe' })
 }
 
 export default getChatrooms
