@@ -14,7 +14,10 @@ module.exports = (sequelize, DataTypes) => {
         }
     }
     media.init({
-        id: DataTypes.UUID,
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true
+        },
         chatroomid: DataTypes.UUID,
         userid: DataTypes.UUID,
         mediaType: DataTypes.STRING,

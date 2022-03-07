@@ -1,11 +1,9 @@
 // import models from "../models"
-const models = require('../models/index')
+const models = require('../db/models')
 import notFound from "./notFound"
 
-const Chatrooms = ChatroomsModel();
-
 console.log({
-    Chatrooms
+    models
 })
 
 export const getChatrooms = async function (req, res) {
@@ -13,21 +11,21 @@ export const getChatrooms = async function (req, res) {
 
     let chatRooms = []
     if (query.groupId) {
-        const chatroomById = await Chatrooms.findOne({
+        const chatroomById = await models.chatrooms.findOne({
             where: {
                 id: query.groupId
             }
         });
         chatRooms.push(chatroomById)
     } else if (query.groupName) {
-        const chatroomByName = await Chatrooms.findAll({
+        const chatroomByName = await models.chatrooms.findAll({
             where: {
                 name: query.groupName
             }
         });
         chatRooms.push(chatroomByName)
     } else {
-        const allChats = await Chatrooms.findAll();
+        const allChats = await models.chatrooms.findAll();
         chatRooms = [
             ...chatRooms,
             ...allChats
