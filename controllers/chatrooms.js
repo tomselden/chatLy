@@ -2,9 +2,6 @@
 const models = require('../db/models')
 import notFound from "./notFound"
 
-console.log({
-    models
-})
 
 export const getChatrooms = async function (req, res) {
     const { params, query } = req
@@ -39,8 +36,16 @@ export const getChatrooms = async function (req, res) {
     }
 }
 
-export const createChatroom = (req, res) => {
-    res.status(200).json({ name: 'John Doe' })
+export const createChatroom = async (req, res) => {
+    try {
+        const chatroom = await models.chatrooms.create(req.body)
+        console.log({ chatroom })
+        res.json(chatroom.toJSON())
+    } catch (error) {
+        console.log({ error })
+        notFound(res)
+    }
+    // res.status(200).json({ name: 'John Doe' })
 }
 
 export default getChatrooms

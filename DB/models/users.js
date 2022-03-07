@@ -16,7 +16,8 @@ module.exports = (sequelize, DataTypes) => {
   users.init({
     id: {
       type: DataTypes.INTEGER,
-      primaryKey: true
+      primaryKey: true,
+      autoIncrement: true // Automatically gets converted to SERIAL for postgres
     },
     username: DataTypes.STRING,
     email: DataTypes.STRING,

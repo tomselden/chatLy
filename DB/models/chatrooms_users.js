@@ -16,7 +16,8 @@ module.exports = (sequelize, DataTypes) => {
     chatroom_users.init({
         id: {
             type: DataTypes.INTEGER,
-            primaryKey: true
+            primaryKey: true,
+            autoIncrement: true
         },
         chatroomid: DataTypes.UUID,
         userid: DataTypes.UUID,

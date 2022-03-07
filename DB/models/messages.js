@@ -16,7 +16,8 @@ module.exports = (sequelize, DataTypes) => {
     media.init({
         id: {
             type: DataTypes.INTEGER,
-            primaryKey: true
+            primaryKey: true,
+            autoIncrement: true
         },
         chatroomid: DataTypes.UUID,
         userid: DataTypes.UUID,

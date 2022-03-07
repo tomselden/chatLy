@@ -6,11 +6,7 @@ const { Sequelize, DataTypes } = require('sequelize');
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
 const filebasename = 'index.js';
-const db = {};
-
-console.log({
-  config
-})
+const db = {}
 
 /* Custom handler for reading current working directory */
 const models = '../../db/models/';
@@ -35,9 +31,7 @@ fs
   })
   .map(file => require('../../db/models/' + file))
   .forEach((Model) => {
-    console.log({ DataTypes })
     const model = Model(sequelize, DataTypes);
-    console.log({ model, name: model.name })
     db[model.name] = model
   });
 
