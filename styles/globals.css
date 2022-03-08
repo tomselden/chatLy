@@ -14,3 +14,17 @@ a {
 * {
   box-sizing: border-box;
 }
+
+/*
+  not all heroes wear cape.
+  thank you @dmurawsky
+  https://gist.github.com/dmurawsky/d45f068097d181c733a53687edce1919
+*/
+html,
+body,
+body > div:first-child,
+div#__next,
+div#__next > div,
+.full-height {
+  height: 100%;
+}
