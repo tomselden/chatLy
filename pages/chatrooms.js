@@ -10,9 +10,7 @@ export default function Chatrooms() {
             <Row className='full-height'>
                 <Col style={{ border: '1px solid black' }} xs={3}>list of chats</Col>
                 <Col style={{ border: '1px solid black' }} xs={9}>open chat</Col>
-
             </Row>
-
         </Container>
     )
 }
