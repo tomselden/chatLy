@@ -115,10 +115,11 @@
   }
 }
 
-.SignIn {
+.signIn {
   text-align: center;
 }
 
-.BoldText {
+.boldText {
   font-weight: bolder;
-}
+} 
+

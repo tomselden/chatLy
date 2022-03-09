@@ -2,13 +2,14 @@ import styles from "../styles/Home.module.css";
 import { Form, Row, Col } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import Chatrooms from "../pages/chatrooms";
+import Link from "next/link";
 
 const SignIn = () => {
   return (
-    <div className={styles.SignIn}>
+    <div className={styles.signIn}>
       <Form>
         <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
-          <Form.Label column sm="2" className="BoldText">
+          <Form.Label column sm="2" className="boldText">
             Email
           </Form.Label>
           <Col sm="10">
@@ -27,9 +28,9 @@ const SignIn = () => {
             <Form.Control type="password" placeholder="Password" />
           </Col>
         </Form.Group>
-        <Button variant="primary" href="/chatroom" onClick={Chatrooms}>
-          Sign In
-        </Button>{" "}
+        <Link href="/chatroom">
+          <Button variant="primary">Sign In</Button>
+        </Link>
       </Form>
     </div>
   );
