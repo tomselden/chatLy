@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Avatar from '../components/Avatar'
 import styles from '../styles/Home.module.css'
+import SignIn from "../components/SignInForm"
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
           Welcome to Chatly
         </h1>
         <Avatar />
+        <SignIn />
 
         <p className={styles.description}>
           a chat application that allows users to join a chat room something like slack. we can create chat rooms and share URLs. Each user should provide us with an email and name to join a chat.
