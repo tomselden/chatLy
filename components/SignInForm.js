@@ -1,6 +1,5 @@
 import styles from "../styles/Home.module.css";
-import { Form, Row, Col } from "react-bootstrap";
-import { Button } from "react-bootstrap";
+import { Form, Row, Col, Button } from "react-bootstrap";
 import Chatrooms from "../pages/chatrooms";
 
 const SignIn = () => {
