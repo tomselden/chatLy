@@ -1,6 +1,7 @@
 import styles from "../styles/Home.module.css";
 import { Form, Row, Col } from "react-bootstrap";
 import { Button } from "react-bootstrap";
+import Chatrooms from "../pages/chatrooms";
 
 const SignIn = () => {
   return (
@@ -26,7 +27,7 @@ const SignIn = () => {
             <Form.Control type="password" placeholder="Password" />
           </Col>
         </Form.Group>
-        <Button variant="primary" href="/chat" onClick={""}>
+        <Button variant="primary" href="/chatroom" onClick={Chatrooms}>
           Sign In
         </Button>{" "}
       </Form>
