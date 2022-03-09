@@ -26,7 +26,11 @@ const SignIn = () => {
             <Form.Control type="password" placeholder="Password" />
           </Col>
         </Form.Group>
-        <Button variant="primary" href="/chatroom" onClick={Chatrooms}>
+        <Link href="/chatroom">
+            <Button variant="primary">
+                Sign In
+            </Button>
+        </Link>
           Sign In
         </Button>{" "}
       </Form>
