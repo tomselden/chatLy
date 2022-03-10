@@ -36,7 +36,7 @@ export default function Chatrooms() {
 
     useEffect(() => {
         fetch('/api/chatrooms')
-            .then(response.json())
+            .then(response => response.json())
             .then(data => setGroups(data.chatRooms))
             .catch(console.error)
     }, [])
