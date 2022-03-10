@@ -8,7 +8,7 @@ export default function GroupItem(props) {
             <Row>
                 <Col xs={3}><Image src="http://placekitten.com/g/200/200" fluid roundedCircle /></Col>
                 <Col xs={6}>
-                    <div>{props.groupName}</div>
+                    <div>{props.name}</div>
                     <div>{props.lastMessage}</div>
                 </Col>
                 <Col xs={3}>
