@@ -1,21 +1,41 @@
-import Head from 'next/head'
-import { Col, Container, Row, Image } from 'react-bootstrap'
-
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import Divider from '@mui/material/Divider';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
+import Typography from '@mui/material/Typography';
 
 export default function GroupItem(props) {
     return (
-        <Container fluid className='p-2' style={{ borderBottom: '1px solid black' }}>
-            <Row>
-                <Col xs={3}><Image src="http://placekitten.com/g/200/200" fluid roundedCircle /></Col>
-                <Col xs={6}>
-                    <div>{props.name}</div>
-                    <div>{props.lastMessage}</div>
-                </Col>
-                <Col xs={3}>
-                    <div>{props.when}</div>
-                    <div>{props.unReadMessages}</div>
-                </Col>
-            </Row>
-        </Container>
+        <>
+            <ListItem alignItems="flex-start">
+                <ListItemAvatar>
+                    <Avatar alt="Remy Sharp" src={`https://picsum.photos/200?key=${props.id}`} />
+                </ListItemAvatar>
+                <ListItemText
+                    primary={props.name}
+                    secondary={
+                        <>
+                            <Typography
+                                sx={{ display: 'inline' }}
+                                component="span"
+                                variant="body2"
+                                color="text.primary"
+                            >
+                                {props.username || "milcab"}
+                            </Typography>
+                            {props.lastMessage || " — I'll be in your neighborhood doing errands this…"}
+                        </>
+                    }
+                />
+            </ListItem>
+            <Divider variant="inset" component="li" />
+        </>
     )
 }
+
+export const GroupList = ({ groups }) =>
+    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+        {groups.map(groupData => <GroupItem {...groupData} />)}
+    </List>
