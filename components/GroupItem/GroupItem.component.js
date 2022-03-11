@@ -11,7 +11,7 @@ export default function GroupItem(props) {
         <>
             <ListItem alignItems="flex-start">
                 <ListItemAvatar>
-                    <Avatar alt="Remy Sharp" src={`https://picsum.photos/200?key=${props.id}`} />
+                    <Avatar alt="Remy Sharp" src={props.imageURL || `https://picsum.photos/200?key=${props.id}`} />
                 </ListItemAvatar>
                 <ListItemText
                     primary={props.name}

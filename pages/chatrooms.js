@@ -1,11 +1,29 @@
 import { Col, Container, Row, Stack, SearchB } from 'react-bootstrap'
 import { useEffect, useState } from 'react'
-import GroupItem from '../components/GroupItem/GroupItem.component'
-import { TextField } from '@mui/material';
 
+import { TextField } from '@mui/material';
 import Settings from '@mui/icons-material/Settings';
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
 import PlusOneRounded from '@mui/icons-material/PlusOneRounded';
-import ReactScrollableList from 'react-scrollable-list'
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+
+import { GroupList } from '../components/GroupItem/GroupItem.component'
+import styles from "../styles/chatrooms.module.css"
+import AddNewGroupForm from '../components/AddNewGroupForm/AddNewGroupForm';
+
+const ModalBoxStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+};
 
 let listItems = []
 for (let i = 0; i < 10000; i++) {
@@ -34,37 +52,58 @@ export default function Chatrooms() {
 
     const [groups, setGroups] = useState([])
 
-    useEffect(() => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const getChatrooms = () => {
         fetch('/api/chatrooms')
             .then(response => response.json())
             .then(data => setGroups(data.chatRooms))
             .catch(console.error)
+    }
+
+    useEffect(() => {
+        getChatrooms()
     }, [])
 
     return (
-        <Container fluid>
+        <Container fluid className={styles.chatroomsContainer}>
             <Row className='full-height'>
                 <Col style={{ border: '1px solid black' }} xs={3}>
                     <div style={{ flex: 'row' }}>
                         {/* <Icon n÷ame */}
                         <Settings />
                         <PlusOneRounded />
+                        <a onClick={() => setIsModalOpen(true)}>
+                            <Fab color="primary" aria-label="add">
+                                <AddIcon />
+                            </Fab>
+                        </a>
+                        <Modal
+                            open={isModalOpen}
+                            onClose={() => setIsModalOpen(false)}
+                            aria-labelledby="modal-modal-title"
+                            aria-describedby="modal-modal-description"
+                        >
+                            <Box sx={ModalBoxStyle}>
+                                <AddNewGroupForm onSubmit={() => {
+                                    setIsModalOpen(false)
+                                    getChatrooms();
+                                }} />
+                            </Box>
+                        </Modal>
                     </div>
-                    <TextField
-                        id="outlined-basic"
-                        variant="outlined"
-                        fullWidth
-                        label="Search"
-                        style={{
-                            marginTop: 20
-                        }}
-                    />
-
-                    <Stack gap={3}>
-                        {groups.map(groupData => <GroupItem {...groupData} />)}
-                    </Stack>
-
-
+                    <div>
+                        <TextField
+                            id="outlined-basic"
+                            variant="outlined"
+                            fullWidth
+                            label="Search"
+                            style={{
+                                marginTop: 20
+                            }}
+                        />
+                    </div>
+                    <GroupList groups={groups} />
                 </Col>
                 <Col style={{ border: '1px solid black' }} xs={9}>
                     <div style={{ marginRight: 0 }}>
