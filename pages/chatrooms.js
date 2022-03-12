@@ -12,6 +12,7 @@ import Modal from '@mui/material/Modal';
 import { GroupList } from '../components/GroupItem/GroupItem.component'
 import styles from "../styles/chatrooms.module.css"
 import AddNewGroupForm from '../components/AddNewGroupForm/AddNewGroupForm';
+import Messages from '../components/Messages/Messages';
 
 const ModalBoxStyle = {
     position: 'absolute',
@@ -35,6 +36,7 @@ export default function Chatrooms() {
     const [selectedGroupId, setSelectedGroupId] = useState(null);
     const selectedGroupData = selectedGroupId ? groups.find(g => g.id === selectedGroupId) : {};
     const messages = selectedGroupData.messages || [];
+    const users = selectedGroupData.users || [];
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const getChatrooms = () => {
@@ -89,25 +91,7 @@ export default function Chatrooms() {
                     <GroupList groups={groups} onChatroomSelected={setSelectedGroupId} />
                 </Col>
                 <Col style={{ border: '1px solid black' }} xs={9}>
-                    <Stack gap={3} style={{ margin: 20 }}>
-
-                        {messages.map((message) => {
-                            // if (message.sender == 'Rama') {
-                            //     return (
-                            //         <div style={{ textAlign: 'right' }}>
-                            //             {message.message}
-                            //         </div>
-                            //     )
-                            // }
-
-                            return (
-                                <div >
-                                    {message.text}
-                                </div>
-                            )
-
-                        })}
-                    </Stack>
+                    <Messages messages={messages} users={users} />
 
 
                     <TextField

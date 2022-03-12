@@ -1,10 +1,5 @@
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import Divider from '@mui/material/Divider';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
+
+import { Badge, MailIcon, Typography, Avatar, ListItemAvatar, ListItemText, Divider, ListItem, List } from '@mui/material';
 
 export default function GroupItem(props) {
     const clickHandler = () => {
@@ -31,6 +26,11 @@ export default function GroupItem(props) {
                             </Typography>
                             {" "}
                             {lastMessage ? lastMessage.text : "no messages"}
+                            {" "}
+                            {
+                                props.messages.length > 0 &&
+                                <Badge badgeContent={props.messages.length} color="success" />
+                            }
                         </>
                     }
                 />
