@@ -3,7 +3,6 @@ import Image from 'next/image'
 import Avatar from '../components/Avatar'
 import styles from '../styles/Home.module.css'
 import SignIn from "../components/SignInForm"
-import Chatrooms from './chatrooms'
 
 export default function Home() {
   return (
