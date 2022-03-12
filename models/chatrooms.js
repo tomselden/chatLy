@@ -11,7 +11,8 @@ module.exports = (sequelize, DataTypes) => {
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            // define association here
+            models.chatrooms.hasMany(models.messages)
+            models.chatrooms.belongsToMany(models.users, { through: 'chatrooms_users' }); // A BelongsToMany B through the junction table C
         }
     }
 

@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      models.users.belongsToMany(models.chatrooms, { through: 'chatrooms_users' }); // A BelongsToMany B through the junction table C
       // define association here
     }
   }
@@ -21,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     username: DataTypes.STRING,
     email: DataTypes.STRING,
-    avatar: DataTypes.BLOB
+    avatarURL: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'users',
