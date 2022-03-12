@@ -149,8 +149,8 @@ export default function Chatrooms() {
                             position: 'absolute', bottom: 20,
                             width: '72.5%'
                         }}
-
-                    />
+                      
+                        />
 
                 </Col>
             </Row>
