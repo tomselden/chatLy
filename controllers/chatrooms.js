@@ -1,5 +1,5 @@
 // import models from "../models"
-const models = require('../db/models')
+const models = require('../models')
 import notFound from "./notFound"
 
 const getChatroomById = async (id) => {
@@ -29,7 +29,12 @@ export const getChatrooms = async function (req, res) {
             });
             chatRooms.push(chatroomByName)
         } else {
-            const allChats = await models.chatrooms.findAll();
+            const allChats = await models.chatrooms.findAll({
+                include: [
+                    { model: models.messages, as: 'messages' },
+                    { model: models.users, as: 'users' }
+                ]
+            });
             chatRooms = allChats;
         }
     } catch (error) {

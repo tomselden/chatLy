@@ -29,26 +29,12 @@ let listItems = []
 for (let i = 0; i < 10000; i++) {
     listItems.push({ id: i, content: i })
 }
-const fakeMessages = [
-    { sender: 'Rama', message: 'How are you?' },
-    { sender: 'Johnny', message: 'Am good.' },
-    { sender: 'Rama', message: 'How are you?' },
-    { sender: 'Johnny', message: 'Am good.' },
-    { sender: 'Rama', message: 'How are you?' },
-    { sender: 'Johnny', message: 'Am good.' },
-    { sender: 'Rama', message: 'How are you?' },
-    { sender: 'Johnny', message: 'Am good.' },
-    { sender: 'Rama', message: 'How are you?' },
-    { sender: 'Johnny', message: 'Am good.' },
-    { sender: 'Rama', message: 'How are you?' },
-    { sender: 'Johnny', message: 'Am good.' }
-]
 
 export default function Chatrooms() {
 
 
     const [newMessage, setNewMessage] = useState('')
-    const [allMessages, setAllMessages] = useState(fakeMessages)
+    const [allMessages, setAllMessages] = useState([])
 
     const [groups, setGroups] = useState([])
 
