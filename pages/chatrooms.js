@@ -31,13 +31,10 @@ for (let i = 0; i < 10000; i++) {
 }
 
 export default function Chatrooms() {
-
-
-    const [newMessage, setNewMessage] = useState('')
-    const [allMessages, setAllMessages] = useState([])
-
-    const [groups, setGroups] = useState([])
-
+    const [groups, setGroups] = useState([]);
+    const [selectedGroupId, setSelectedGroupId] = useState(null);
+    const selectedGroupData = selectedGroupId ? groups.find(g => g.id === selectedGroupId) : {};
+    const messages = selectedGroupData.messages || [];
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const getChatrooms = () => {
@@ -89,29 +86,26 @@ export default function Chatrooms() {
                             }}
                         />
                     </div>
-                    <GroupList groups={groups} />
+                    <GroupList groups={groups} onChatroomSelected={setSelectedGroupId} />
                 </Col>
                 <Col style={{ border: '1px solid black' }} xs={9}>
-                    <div style={{ marginRight: 0 }}>
-                        <Settings />
-                    </div>
                     <Stack gap={3} style={{ margin: 20 }}>
 
-                        {allMessages.map((message) => {
-                            if (message.sender == 'Rama') {
-                                return (
-                                    <div style={{ textAlign: 'right' }}>
-                                        {message.message}
-                                    </div>
-                                )
-                            }
-                            else {
-                                return (
-                                    <div >
-                                        {message.message}
-                                    </div>
-                                )
-                            }
+                        {messages.map((message) => {
+                            // if (message.sender == 'Rama') {
+                            //     return (
+                            //         <div style={{ textAlign: 'right' }}>
+                            //             {message.message}
+                            //         </div>
+                            //     )
+                            // }
+
+                            return (
+                                <div >
+                                    {message.text}
+                                </div>
+                            )
+
                         })}
                     </Stack>
 
@@ -120,14 +114,14 @@ export default function Chatrooms() {
 
                         id="outlined-basic"
                         variant="outlined"
-                        value={newMessage}
-                        onChange={(event) => setNewMessage(event.target.value)}
+                        // value={ }
+                        // onChange={ }
                         onKeyDown={(event) => {
-                            if (newMessage.length > 0 && event.keyCode == 13) {
-                                setAllMessages([...allMessages, { 'sender': 'Rama', 'message': newMessage }])
-                                setNewMessage('')
-                                // alert(newMessage)
-                            }
+                            // if (newMessage.length > 0 && event.keyCode == 13) {
+                            //     setAllMessages([...allMessages, { 'sender': 'Rama', 'message': newMessage }])
+                            //     setNewMessage('')
+                            //     // alert(newMessage)
+                            // }
                         }}
                         label="Message"
                         style={{
@@ -135,7 +129,6 @@ export default function Chatrooms() {
                             position: 'absolute', bottom: 20,
                             width: '72.5%'
                         }}
-
                     />
 
                 </Col>

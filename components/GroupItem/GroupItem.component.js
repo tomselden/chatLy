@@ -7,14 +7,17 @@ import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 
 export default function GroupItem(props) {
+    const clickHandler = () => {
+        props.onChatroomSelected(props.id)
+    };
     return (
         <>
-            <ListItem alignItems="flex-start">
+            <ListItem alignItems="flex-start" onClick={clickHandler}>
                 <ListItemAvatar>
                     <Avatar alt="Remy Sharp" src={props.imageURL || `https://picsum.photos/200?key=${props.id}`} />
                 </ListItemAvatar>
                 <ListItemText
-                    primary={props.name}
+                    primary={props.name || props.id}
                     secondary={
                         <>
                             <Typography
@@ -35,7 +38,7 @@ export default function GroupItem(props) {
     )
 }
 
-export const GroupList = ({ groups }) =>
+export const GroupList = ({ groups, onChatroomSelected }) =>
     <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-        {groups.map(groupData => <GroupItem {...groupData} />)}
+        {groups.map(groupData => <GroupItem {...groupData} onChatroomSelected={onChatroomSelected} />)}
     </List>
