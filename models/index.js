@@ -9,7 +9,7 @@ const filebasename = 'index.js';
 const db = {}
 
 /* Custom handler for reading current working directory */
-const models = '../../db/models/';
+const models = '../models/';
 let sequelize;
 
 if (config.use_env_variable) {
@@ -24,12 +24,12 @@ if (config.use_env_variable) {
 }
 
 fs
-  .readdirSync(process.cwd() + '/db/models/' || __dirname)
+  .readdirSync(process.cwd() + '/models/' || __dirname)
   .filter((file) => {
     return (file !== filebasename)
       && (file.endsWith('.js'));;
   })
-  .map(file => require('../../db/models/' + file))
+  .map(file => require('../models/' + file))
   .forEach((Model) => {
     const model = Model(sequelize, DataTypes);
     db[model.name] = model
