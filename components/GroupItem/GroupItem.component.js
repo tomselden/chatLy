@@ -10,6 +10,7 @@ export default function GroupItem(props) {
     const clickHandler = () => {
         props.onChatroomSelected(props.id)
     };
+    const lastMessage = props.messages[props.messages.length - 1]
     return (
         <>
             <ListItem alignItems="flex-start" onClick={clickHandler}>
@@ -28,7 +29,8 @@ export default function GroupItem(props) {
                             >
                                 {props.username || "milcab"}
                             </Typography>
-                            {props.lastMessage || " — I'll be in your neighborhood doing errands this…"}
+                            {" "}
+                            {lastMessage ? lastMessage.text : "no messages"}
                         </>
                     }
                 />
