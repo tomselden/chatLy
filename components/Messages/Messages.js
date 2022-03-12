@@ -4,7 +4,7 @@ import { Stack } from '@mui/material';
 import { MessageLeft } from "./Message.left";
 import { MessageRight } from "./Message.right";
 
-export default function ({ messages, users }) {
+export default function ({ messages = [], users = [] }) {
     return (<Stack gap={3} style={{ margin: 20 }}>
 
         {messages.map((message) => {

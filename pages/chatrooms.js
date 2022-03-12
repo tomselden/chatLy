@@ -10,9 +10,11 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 
 import { GroupList } from '../components/GroupItem/GroupItem.component'
-import styles from "../styles/chatrooms.module.css"
 import AddNewGroupForm from '../components/AddNewGroupForm/AddNewGroupForm';
 import Messages from '../components/Messages/Messages';
+import NewMessage from '../components/Messages/NewMessage';
+import styles from "../styles/chatrooms.module.css"
+
 
 const ModalBoxStyle = {
     position: 'absolute',
@@ -53,9 +55,8 @@ export default function Chatrooms() {
     return (
         <Container fluid className={styles.chatroomsContainer}>
             <Row className='full-height'>
-                <Col style={{ border: '1px solid black' }} xs={3}>
-                    <div style={{ flex: 'row' }}>
-                        {/* <Icon n÷ame */}
+                <Col className={styles.leftPanel} xs={3}>
+                    <div className={styles.settings}>
                         <Settings />
                         <PlusOneRounded />
                         <a onClick={() => setIsModalOpen(true)}>
@@ -77,7 +78,8 @@ export default function Chatrooms() {
                             </Box>
                         </Modal>
                     </div>
-                    <div>
+
+                    <div className={styles.search}>
                         <TextField
                             id="outlined-basic"
                             variant="outlined"
@@ -88,33 +90,17 @@ export default function Chatrooms() {
                             }}
                         />
                     </div>
-                    <GroupList groups={groups} onChatroomSelected={setSelectedGroupId} />
+                    <div className={styles.groupList}>
+                        <GroupList groups={groups} onChatroomSelected={setSelectedGroupId} />
+                    </div>
                 </Col>
-                <Col style={{ border: '1px solid black' }} xs={9}>
-                    <Messages messages={messages} users={users} />
-
-
-                    <TextField
-
-                        id="outlined-basic"
-                        variant="outlined"
-                        // value={ }
-                        // onChange={ }
-                        onKeyDown={(event) => {
-                            // if (newMessage.length > 0 && event.keyCode == 13) {
-                            //     setAllMessages([...allMessages, { 'sender': 'Rama', 'message': newMessage }])
-                            //     setNewMessage('')
-                            //     // alert(newMessage)
-                            // }
-                        }}
-                        label="Message"
-                        style={{
-                            marginTop: 20,
-                            position: 'absolute', bottom: 20,
-                            width: '72.5%'
-                        }}
-                    />
-
+                <Col className={styles.rightPanel} xs={9}>
+                    <div className={styles.messages}>
+                        <Messages messages={messages} users={users} />
+                    </div>
+                    <div className={styles.newMessage}>
+                        <NewMessage onSubmit={getChatrooms} />
+                    </div>
                 </Col>
             </Row>
         </Container>

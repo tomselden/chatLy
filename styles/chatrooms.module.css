@@ -1,3 +1,58 @@
 .chatroomsContainer {
-  background-color: #dadbd3;
+  /* background-color: #dadbd3; */
+}
+
+.leftPanel,
+.rightPanel {
+  position: relative;
+}
+
+.leftPanel {
+  display: flex;
+  flex-flow: column wrap;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.2fr 0.2fr 2.8fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "settings"
+    "search"
+    "group-list";
+  height: 100%;
+}
+
+.settings {
+  grid-area: settings;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.search {
+  grid-area: search;
+}
+
+.groupList {
+  grid-area: group-list;
+  overflow: auto;
+}
+
+.rightPanel {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.95fr 0.05fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "messages"
+    "new-message";
+}
+
+.messages {
+  grid-area: messages;
+}
+
+.newMessage {
+  grid-area: new-message;
 }
