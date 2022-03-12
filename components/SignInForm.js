@@ -1,7 +1,9 @@
 import styles from "../styles/Home.module.css";
 import { Form, Row, Col, Button } from "react-bootstrap";
-import Chatrooms from "../pages/chatrooms";
 import Link from "next/link";
+import Chatrooms from "../pages/chatrooms";
+
+
 
 const SignIn = () => {
   return (
@@ -27,7 +29,7 @@ const SignIn = () => {
             <Form.Control type="password" placeholder="Password" />
           </Col>
         </Form.Group>
-        <Link href="/chatroom">
+        <Link href="/chatrooms">
           <Button variant="primary">Sign In</Button>
         </Link>
       </Form>
@@ -36,3 +38,6 @@ const SignIn = () => {
 };
 
 export default SignIn;
+
+
+// 
