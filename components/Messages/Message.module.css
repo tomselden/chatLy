@@ -98,3 +98,25 @@
 .displayName {
   margin-left: 20px;
 }
+
+.newMessageWrapper {
+  display: grid;
+  grid-template-columns: 0.8fr 0.2fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas: "inputField send-button";
+  height: 100%;
+}
+
+.inputField {
+  grid-area: inputField;
+}
+
+.inputField input {
+  height: 100% !important;
+}
+
+.send-button {
+  grid-area: send-button;
+}
