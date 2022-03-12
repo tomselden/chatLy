@@ -1,6 +1,5 @@
-import { Col, Container, Row, Stack, SearchB } from 'react-bootstrap'
+import { Col, Container, Row } from 'react-bootstrap'
 import { useEffect, useState } from 'react'
-
 import { TextField } from '@mui/material';
 import Settings from '@mui/icons-material/Settings';
 import Fab from '@mui/material/Fab';
@@ -37,7 +36,9 @@ export default function Chatrooms() {
     const [groups, setGroups] = useState([]);
     const [selectedGroupId, setSelectedGroupId] = useState(null);
     const selectedGroupData = selectedGroupId ? groups.find(g => g.id === selectedGroupId) : {};
+
     const messages = selectedGroupData.messages || [];
+
     const users = selectedGroupData.users || [];
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -95,12 +96,14 @@ export default function Chatrooms() {
                     </div>
                 </Col>
                 <Col className={styles.rightPanel} xs={9}>
-                    <div className={styles.messages}>
-                        <Messages messages={messages} users={users} />
-                    </div>
-                    <div className={styles.newMessage}>
-                        <NewMessage onSubmit={getChatrooms} />
-                    </div>
+                    {selectedGroupId && <>
+                        <div className={styles.messages}>
+                            <Messages messages={messages} users={users} />
+                        </div>
+                        <div className={styles.newMessage}>
+                            <NewMessage onSubmit={getChatrooms} chatroomId={selectedGroupId} userId={1} />
+                        </div>
+                    </>}
                 </Col>
             </Row>
         </Container>
