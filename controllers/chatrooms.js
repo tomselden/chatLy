@@ -34,9 +34,9 @@ export const getChatrooms = async function (req, res) {
                     { model: models.messages, as: 'messages' },
                     { model: models.users, as: 'users' }
                 ],
-                order: [['messages', 'updatedAt', 'asc']]
+                order: [['createdAt', 'desc'], ['messages', 'updatedAt', 'asc']]
             });
-            chatRooms = sortBy(allChats, 'updatedAt')
+            chatRooms = allChats
         }
     } catch (error) {
         console.log({ error })
