@@ -47,10 +47,12 @@
   grid-template-areas:
     "messages"
     "new-message";
+  height: 100%;
 }
 
 .messages {
   grid-area: messages;
+  overflow: auto;
 }
 
 .newMessage {
