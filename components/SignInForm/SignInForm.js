@@ -5,23 +5,6 @@ import { TextField, Button, Paper } from "@mui/material"
 import UploadButtons from "../UploadImage/UploadImage";
 import styles from "./SignInForm.module.css";
 
-const postMessage = ({
-  username,
-  email,
-  avatarURL
-}) => fetch('/api/users', {
-  method: 'POST',
-  headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({
-    username,
-    email,
-    avatarURL
-  })
-})
-
 const SignIn = ({ onSubmit }) => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
