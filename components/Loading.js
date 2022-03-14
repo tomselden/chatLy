@@ -1,4 +1,4 @@
-import { Circle } from "better-react-spinkit"
+import { DoubleBounce } from "better-react-spinkit"
 
 function Loading() {
     return (
@@ -10,7 +10,7 @@ function Loading() {
                 height="200px"
                 style={{marginBottom:10}}
                 />
-                <Circle color="blue" size={64} /> 
+                <DoubleBounce color="blue" size={100} /> 
             </div>
         </center>
     )

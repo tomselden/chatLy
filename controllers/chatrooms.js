@@ -1,6 +1,8 @@
 import models from "../models"
 import sortBy from "lodash.sortby";
 import notFound from "./notFound"
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../firebase";
 
 const getChatroomById = async (id) => {
     const chatroomById = await models.chatrooms.findOne({
@@ -55,7 +57,7 @@ export const createChatroom = async (req, res) => {
     }
 }
 
-export const updateeChatroom = async (req, res) => {
+export const updateChatroom = async (req, res) => {
     const { chatRoomId } = req.query
 
     if (!chatRoomId) {

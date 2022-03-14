@@ -42,7 +42,6 @@ export default function Chatrooms() {
     console.log(user)
     console.log(user.email)
     console.log(user.displayName)
-    console.log()
     const [groups, setGroups] = useState([]);
     const [selectedGroupId, setSelectedGroupId] = useState(null);
     const selectedGroupData = selectedGroupId ? groups.find(g => g.id === selectedGroupId) : {};
