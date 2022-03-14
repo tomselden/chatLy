@@ -3,25 +3,7 @@ import SendIcon from '@mui/icons-material/Send';
 import { TextField, Button } from "@mui/material"
 
 import styles from "./Message.module.css"
-
-const postMessage = ({
-    chatroomId = 1,
-    userId = 1,
-    imageURL = "",
-    text = "",
-}) => fetch('/api/messages', {
-    method: 'POST',
-    headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-        chatroomId,
-        userId,
-        imageURL,
-        text
-    })
-})
+import { createNewMessage } from '../../services';
 
 export default function ({ onSubmit, chatroomId, userId }) {
     const [text, setText] = useState('');
@@ -29,7 +11,7 @@ export default function ({ onSubmit, chatroomId, userId }) {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        postMessage({
+        createNewMessage({
             text, chatroomId, userId
         })
             .then(() => setText(""))

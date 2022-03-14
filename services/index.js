@@ -1,14 +1,4 @@
-export const createChatroom = (name, imageURL) => fetch('/api/chatrooms', {
-    method: 'POST',
-    headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-        name,
-        imageURL
-    })
-})
+import { DoorBack } from "@mui/icons-material";
 
 const API_KEY = "39953e60e44e63b26905abd9dbcb6760";
 const API_URL = "https://api.imgbb.com/1/upload";
@@ -24,7 +14,19 @@ export const uploadImage = (image) => {
     })
 }
 
-export const postMessage = ({
+// api calls to talk to our DB
+export const createChatroom = (name, imageURL) => fetch('/api/chatrooms', {
+    method: 'POST',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        name,
+        imageURL
+    })
+})
+export const createUser = ({
     username,
     email,
     avatarURL
@@ -38,5 +40,23 @@ export const postMessage = ({
         username,
         email,
         avatarURL
+    })
+})
+export const createNewMessage = ({
+    chatroomId = 1,
+    userId = 1,
+    imageURL = "",
+    text = "",
+}) => fetch('/api/messages', {
+    method: 'POST',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        chatroomId,
+        userId,
+        imageURL,
+        text
     })
 })
