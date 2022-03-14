@@ -1,5 +1,5 @@
-// import models from "../models"
-const models = require('../models')
+import models from "../models"
+import sortBy from "lodash.sortby";
 import notFound from "./notFound"
 
 const getChatroomById = async (id) => {
@@ -33,9 +33,10 @@ export const getChatrooms = async function (req, res) {
                 include: [
                     { model: models.messages, as: 'messages' },
                     { model: models.users, as: 'users' }
-                ]
+                ],
+                order: [['createdAt', 'desc'], ['messages', 'updatedAt', 'asc']]
             });
-            chatRooms = allChats;
+            chatRooms = allChats
         }
     } catch (error) {
         console.log({ error })

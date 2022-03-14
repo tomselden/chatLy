@@ -12,6 +12,7 @@ export default function ({ onSubmit, chatroomId, userId }) {
         event.preventDefault();
 
         createNewMessage({
+
             text, chatroomId, userId
         })
             .then(() => setText(""))

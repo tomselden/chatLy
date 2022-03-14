@@ -20,10 +20,12 @@
     "search"
     "group-list";
   height: 100%;
+  background-color: antiquewhite;
 }
 
 .settings {
   grid-area: settings;
+  background: #fff;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -31,6 +33,7 @@
 
 .search {
   grid-area: search;
+  background: #fff;
 }
 
 .groupList {
