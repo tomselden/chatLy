@@ -13,6 +13,11 @@ import AddNewGroupForm from '../components/AddNewGroupForm/AddNewGroupForm';
 import Messages from '../components/Messages/Messages';
 import NewMessage from '../components/Messages/NewMessage';
 import styles from "../styles/chatrooms.module.css"
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '../firebase';
+
+
+
 
 
 const ModalBoxStyle = {
@@ -33,6 +38,10 @@ for (let i = 0; i < 10000; i++) {
 }
 
 export default function Chatrooms() {
+    const [user] = useAuthState(auth)
+    console.log(user)
+    console.log(user.email)
+    console.log(user.displayName)
     const [groups, setGroups] = useState([]);
     const [selectedGroupId, setSelectedGroupId] = useState(null);
     const selectedGroupData = selectedGroupId ? groups.find(g => g.id === selectedGroupId) : {};

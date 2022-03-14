@@ -1,4 +1,5 @@
-const models = require('../db/models')
+
+const models = require('../models')
 import notFound from "./notFound"
 
 const getUsersById = async (id) => {
