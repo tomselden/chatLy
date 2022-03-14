@@ -5,18 +5,7 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 import UploadButtons from "../UploadImage/UploadImage";
-
-const postChatroom = (name, imageURL) => fetch('/api/chatrooms', {
-    method: 'POST',
-    headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-        name,
-        imageURL
-    })
-})
+import { createChatroom } from "../../services";
 
 export default function AddNewGroupForm({ onSubmit }) {
     const [groupName, setGroupName] = useState('');
@@ -24,7 +13,7 @@ export default function AddNewGroupForm({ onSubmit }) {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        postChatroom(groupName, image)
+        createChatroom(groupName, image)
             .then(onSubmit)
     }
     return <form>

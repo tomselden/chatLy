@@ -48,4 +48,3 @@ const LoginContainer = styled.div`
 const Welcome = styled.h1`
   text-align: center;
 `;
-
