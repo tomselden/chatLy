@@ -1,4 +1,5 @@
-import "../styles/globals.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../styles/globals.css'
 import { auth, db } from "../firebase.js";
 import { useAuthState } from "react-firebase-hooks/auth"
 import SignIn from "../components/SignInForm";
@@ -15,7 +16,7 @@ import {
 } from "firebase/firestore";
 
 function MyApp({ Component, pageProps }) {
- 
+
 
   // useAuthState returns array of 3, first is user, second is loading, third is error
   const [user, loading, error] = useAuthState(auth);
@@ -38,7 +39,7 @@ function MyApp({ Component, pageProps }) {
 
   if (loading) return <Loading />;
 
-  if (!user) return <SignIn />;
+  // if (!user) return <SignIn />;
 
   return <Component {...pageProps} />;
 }
