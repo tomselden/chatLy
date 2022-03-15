@@ -1,11 +1,16 @@
 
-import { Badge, MailIcon, Typography, Avatar, ListItemAvatar, ListItemText, Divider, ListItem, List } from '@mui/material';
+import { Badge, MailIcon, Typography, Avatar, ListItemAvatar, ListItemText, Divider, ListItem, List, Button } from '@mui/material';
+import { joinChatroom } from '../../services';
 
 export default function GroupItem(props) {
     const clickHandler = () => {
         props.onChatroomSelected(props.id)
     };
     const lastMessage = props.messages[props.messages.length - 1]
+    const groupUsers = props.users;
+
+    const userIsInGroup = groupUsers.find(u => u.id === props.userId);
+
     return (
         <>
             <ListItem alignItems="flex-start" onClick={clickHandler}>
@@ -31,6 +36,12 @@ export default function GroupItem(props) {
                                 props.messages.length > 0 &&
                                 <Badge badgeContent={props.messages.length} color="success" />
                             }
+                            {!userIsInGroup && (<Button onClick={() => {
+                                joinChatroom({
+                                    chatroomId: props.id, userId: props.userId
+                                }).then(props.onGroupJoined)
+                            }}>Join</Button>)}
+
                         </>
                     }
                 />
@@ -40,7 +51,7 @@ export default function GroupItem(props) {
     )
 }
 
-export const GroupList = ({ groups, onChatroomSelected }) =>
+export const GroupList = ({ groups, onChatroomSelected, userId, onGroupJoined }) =>
     <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-        {groups.map(groupData => <GroupItem {...groupData} onChatroomSelected={onChatroomSelected} />)}
+        {groups.map(groupData => <GroupItem {...groupData} onChatroomSelected={onChatroomSelected} userId={userId} onGroupJoined={onGroupJoined} />)}
     </List>

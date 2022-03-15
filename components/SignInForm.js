@@ -12,16 +12,16 @@ const googleLogIn = async () => {
   const existingUser = await getUserByEmail(gUser.email).then(response => response.json())
   let loggedInUser;
   if (existingUser.user) {
-    loggedInUser = existingUser.user;
+    loggedInUser = existingUser;
   } else {
-    loggedInUser = await createUser({
-      username: user.displayName,
-      email: user.email,
-      avatarURL: user.photoURL
-    }).then(response => response.json())
+    loggedInUser = (await createUser({
+      username: gUser.displayName,
+      email: gUser.email,
+      avatarURL: gUser.photoURL
+    }).then(response => response.json()))
 
   }
-  ls('self', loggedInUser)
+  ls('self', loggedInUser.user)
 };
 
 function SignIn() {

@@ -15,16 +15,26 @@ export const uploadImage = (image) => {
 }
 
 // api calls to talk to our DB
-export const createChatroom = ({ name, imageURL, userId }) => fetch('/api/chatrooms', {
+export const createChatroom = ({ groupName, imageURL, userId }) => fetch('/api/chatrooms', {
     method: 'POST',
     headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-        name,
+        name: groupName,
         imageURL,
         userId
+    })
+})
+export const joinChatroom = ({ chatroomId, userId }) => fetch('/api/chatrooms?join=true', {
+    method: 'POST',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        chatroomId, userId
     })
 })
 export const createUser = ({

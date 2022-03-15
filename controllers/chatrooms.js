@@ -66,6 +66,22 @@ export const createChatroom = async (req, res) => {
     }
 }
 
+export const joinChatroom = async (req, res) => {
+    try {
+        const chatroom_user = (await models.chatrooms_users.create({
+            userId: req.body.userId,
+            chatroomId: req.body.chatroomId,
+        })).toJSON();
+
+        res.json({
+            chatroom_user
+        })
+    } catch (error) {
+        console.log({ error })
+        res.status(400).send(error)
+    }
+}
+
 export const updateChatroom = async (req, res) => {
     const { chatRoomId } = req.query
 

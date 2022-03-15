@@ -14,6 +14,7 @@ import Messages from '../components/Messages/Messages';
 import NewMessage from '../components/Messages/NewMessage';
 import styles from "../styles/chatrooms.module.css"
 import ls from 'local-storage'
+import _ from "lodash"
 
 const ModalBoxStyle = {
     position: 'absolute',
@@ -37,13 +38,8 @@ export default function Chatrooms() {
 
     useEffect(() => {
         const user = ls('self')
-        console.log({ user })
         setLoggedInUser(user)
     }, [])
-
-    console.log('Chatrooms', {
-        loggedInUser
-    })
 
     const [groups, setGroups] = useState([]);
     const [selectedGroupId, setSelectedGroupId] = useState(null);
@@ -57,13 +53,20 @@ export default function Chatrooms() {
     const getChatrooms = () => {
         fetch('/api/chatrooms')
             .then(response => response.json())
-            .then(data => setGroups(data.chatRooms))
+            .then(data => {
+                if (!_.isEqual(groups, data.chatRooms)) {
+                    setGroups(data.chatRooms)
+                }
+            })
             .catch(console.error)
     }
 
     useEffect(() => {
         getChatrooms()
+        // setInterval(getChatrooms, 500)
     }, [])
+
+    console.log({ loggedInUser })
 
     return (
         <Container fluid className={styles.chatroomsContainer}>
@@ -104,7 +107,7 @@ export default function Chatrooms() {
                         />
                     </div>
                     <div className={styles.groupList}>
-                        <GroupList groups={groups} onChatroomSelected={setSelectedGroupId} userId={loggedInUser?.id} />
+                        <GroupList groups={groups} onChatroomSelected={setSelectedGroupId} userId={loggedInUser?.id} onGroupJoined={getChatrooms} />
                     </div>
                 </Col>
                 <Col className={styles.rightPanel} xs={9}>
