@@ -49,11 +49,20 @@ export const getChatrooms = async function (req, res) {
 
 export const createChatroom = async (req, res) => {
     try {
-        const newRoom = await models.chatrooms.create(req.body)
-        res.json(newRoom.toJSON())
+        const newRoom = (await models.chatrooms.create(req.body)).toJSON()
+        const chatroom_user = (await models.chatrooms_users.create({
+            userId: req.body.userId,
+            chatroomId: newRoom.id,
+            isadmin: true
+        })).toJSON();
+
+        res.json({
+            chatroom: newRoom,
+            chatroom_user
+        })
     } catch (error) {
         console.log({ error })
-        notFound(res)
+        res.status(400).send(error)
     }
 }
 

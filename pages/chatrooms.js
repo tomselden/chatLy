@@ -13,8 +13,7 @@ import AddNewGroupForm from '../components/AddNewGroupForm/AddNewGroupForm';
 import Messages from '../components/Messages/Messages';
 import NewMessage from '../components/Messages/NewMessage';
 import styles from "../styles/chatrooms.module.css"
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '../firebase';
+import ls from 'local-storage'
 
 const ModalBoxStyle = {
     position: 'absolute',
@@ -34,7 +33,18 @@ for (let i = 0; i < 10000; i++) {
 }
 
 export default function Chatrooms() {
-    const [user] = useAuthState(auth)
+    const [loggedInUser, setLoggedInUser] = useState(null)
+
+    useEffect(() => {
+        const user = ls('self')
+        console.log({ user })
+        setLoggedInUser(user)
+    }, [])
+
+    console.log('Chatrooms', {
+        loggedInUser
+    })
+
     const [groups, setGroups] = useState([]);
     const [selectedGroupId, setSelectedGroupId] = useState(null);
     const selectedGroupData = selectedGroupId ? groups.find(g => g.id === selectedGroupId) : {};
@@ -74,7 +84,7 @@ export default function Chatrooms() {
                             aria-describedby="modal-modal-description"
                         >
                             <Box sx={ModalBoxStyle}>
-                                <AddNewGroupForm onSubmit={() => {
+                                <AddNewGroupForm userId={loggedInUser?.id} onSubmit={() => {
                                     setIsModalOpen(false)
                                     getChatrooms();
                                 }} />
@@ -94,16 +104,16 @@ export default function Chatrooms() {
                         />
                     </div>
                     <div className={styles.groupList}>
-                        <GroupList groups={groups} onChatroomSelected={setSelectedGroupId} />
+                        <GroupList groups={groups} onChatroomSelected={setSelectedGroupId} userId={loggedInUser?.id} />
                     </div>
                 </Col>
                 <Col className={styles.rightPanel} xs={9}>
                     {selectedGroupId && <>
                         <div className={styles.messages}>
-                            <Messages messages={messages} users={users} />
+                            <Messages messages={messages} users={users} userId={loggedInUser?.id} />
                         </div>
                         <div className={styles.newMessage}>
-                            <NewMessage onSubmit={getChatrooms} chatroomId={selectedGroupId} userId={1} />
+                            <NewMessage onSubmit={getChatrooms} chatroomId={selectedGroupId} userId={loggedInUser?.id} />
                         </div>
                     </>}
                 </Col>

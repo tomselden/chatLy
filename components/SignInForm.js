@@ -4,23 +4,27 @@ import { auth, provider } from "../firebase";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { Container } from "react-bootstrap";
 import styled from "@emotion/styled";
-import { createUser } from "../services";
+import { createUser, getUserByEmail } from "../services";
+import ls from 'local-storage'
+
+const googleLogIn = async () => {
+  const { user: gUser } = await signInWithPopup(auth, provider);
+  const existingUser = await getUserByEmail(gUser.email).then(response => response.json())
+  let loggedInUser;
+  if (existingUser.user) {
+    loggedInUser = existingUser.user;
+  } else {
+    loggedInUser = await createUser({
+      username: user.displayName,
+      email: user.email,
+      avatarURL: user.photoURL
+    }).then(response => response.json())
+
+  }
+  ls('self', loggedInUser)
+};
 
 function SignIn() {
-  const googleLogIn = () => {
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        const { user } = result
-        createUser({
-          username: user.displayName,
-          email: user.email,
-          avatarURL: user.photoURL
-        });
-      })
-      .catch((error) => {
-        console.log({ error })
-      });
-  };
   return (
     <Container>
       <Head>
