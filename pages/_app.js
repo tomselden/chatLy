@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/globals.css'
-import { auth, db } from "../firebase.js";
+import { auth } from "../firebase.js";
 import { useAuthState } from "react-firebase-hooks/auth"
 import SignIn from "../components/SignInForm";
 import Loading from "../components/Loading";
