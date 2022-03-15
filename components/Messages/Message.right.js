@@ -6,9 +6,9 @@ import styles from "./Message.module.css";
 export const MessageRight = ({ message, user }) => {
     const messageText = message.text ? message.text : "no message";
     const timestamp = message.ignore ? message.updatedAt : "";
-    const avatarURL = user.avatarURL ? user.avatarURL : `https://picsum.photos/200?key=${user.id}`;
+    const avatarURL = user?.avatarURL ? user.avatarURL : `https://picsum.photos/200?key=${user?.id}`;
 
-    const displayName = user.username ? user.username : "milca";
+    const displayName = user?.username ? user.username : "milca";
     return (
         <div className={styles.messageRowRight}>
             <div className={styles.messageOrange}>
