@@ -7,13 +7,12 @@ import Button from '@mui/material/Button';
 import UploadButtons from "../UploadImage/UploadImage";
 import { createChatroom } from "../../services";
 
-export default function AddNewGroupForm({ onSubmit }) {
+export default function AddNewGroupForm({ onSubmit, userId }) {
     const [groupName, setGroupName] = useState('');
-    const [image, setImage] = useState(null);
+    const [imageURL, setImage] = useState(null);
     const handleSubmit = (event) => {
         event.preventDefault();
-
-        createChatroom(groupName, image)
+        createChatroom({ groupName, imageURL, userId })
             .then(onSubmit)
     }
     return <form>
