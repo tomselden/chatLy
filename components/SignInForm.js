@@ -4,16 +4,21 @@ import { auth, provider } from "../firebase";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { Container } from "react-bootstrap";
 import styled from "@emotion/styled";
+import { createUser } from "../services";
 
 function SignIn() {
   const googleLogIn = () => {
     signInWithPopup(auth, provider)
-      .then((result) => {})
+      .then((result) => {
+        const { user } = result
+        createUser({
+          username: user.displayName,
+          email: user.email,
+          avatarURL: user.photoURL
+        });
+      })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-
-        const email = error.email;
+        console.log({ error })
       });
   };
   return (
@@ -25,7 +30,7 @@ function SignIn() {
         <h1>Welcome to ChatLy!</h1>
       </Welcome>
       <LoginContainer>
-        <Button style={{height: "150px", width: "250px", bottom: "100px"}} onClick={() => googleLogIn()} variant="outlined">
+        <Button style={{ height: "150px", width: "250px", bottom: "100px" }} onClick={() => googleLogIn()} variant="outlined">
           Sign in with Google
         </Button>
       </LoginContainer>
