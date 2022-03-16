@@ -1,13 +1,14 @@
 import Head from "next/head";
 import { Button } from "@mui/material";
-import { auth, provider } from "../firebase";
+import { auth, provider } from "../../firebase";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { Container } from "react-bootstrap";
 import styled from "@emotion/styled";
-import { createUser, getUserByEmail } from "../services";
+import { createUser, getUserByEmail } from "../../services";
 import ls from "local-storage";
-import AvatarLogo from "./AvatarLogo";
-import styles from "../styles/Home.module.css";
+import AvatarLogo from "../AppLogo/AppLogo";
+
+import styles from './SignInForm.module.css'
 
 const googleLogIn = async () => {
   const { user: gUser } = await signInWithPopup(auth, provider);
@@ -25,22 +26,24 @@ const googleLogIn = async () => {
     }).then((response) => response.json());
   }
   ls("self", loggedInUser.user);
+
+  window.location.href = "/chatrooms";
 };
 
 function SignIn() {
   return (
-    <body style={{ backgroundColor: "black" }}>
-      <Container style={{ backgroundColor: "black", alignItems: "center" }}>
-        <Head>
-          <title>Login</title>
-        </Head>
-        <Welcome style={{ backgroundColor: "black" }}>
-          <h1 style={{ color: "white", fontSize: "60px" }}>
-            Welcome to ChatLy!
-          </h1>
-        </Welcome>
+    <>
+      <Head>
+        <title>Login</title>
+      </Head>
+      <div className={styles.container}>
+        <AvatarLogo />
+        <Welcome style={{ color: "white", fontSize: "60px" }}>
 
-        <LoginContainer style={{ backgroundColor: "black" }}>
+          Welcome to ChatLy!
+
+        </Welcome>
+        <LoginContainer>
           <Button
             style={{
               height: "100px",
@@ -55,8 +58,8 @@ function SignIn() {
             Sign in with Google
           </Button>
         </LoginContainer>
-      </Container>
-    </body>
+      </div>
+    </>
   );
 }
 
