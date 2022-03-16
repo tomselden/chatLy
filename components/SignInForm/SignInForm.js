@@ -26,6 +26,8 @@ const googleLogIn = async () => {
     }).then((response) => response.json());
   }
   ls("self", loggedInUser.user);
+
+  window.location.href = "/chatrooms";
 };
 
 function SignIn() {
