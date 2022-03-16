@@ -1,0 +1,9 @@
+.container {
+  background-color: black;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  max-height: 716px;
+  height: auto !important;
+  overflow: hidden;
+}
