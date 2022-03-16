@@ -12,6 +12,14 @@ const SocketHandler = (req, res) => {
             socket.on('new-message', () => {
                 socket.broadcast.emit('new-message-received')
             })
+
+            socket.on('new-group', () => {
+                socket.broadcast.emit('new-group-created')
+            })
+
+            socket.on('join-group', () => {
+                socket.broadcast.emit('new-group-member')
+            })
         })
     }
     res.end()
