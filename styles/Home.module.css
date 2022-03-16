@@ -123,3 +123,14 @@
   font-weight: bolder;
 } 
 
+.image-wrapper {
+  box-sizing: content-box;
+  margin: 32px auto;
+  box-sizing: content-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
