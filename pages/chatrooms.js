@@ -42,6 +42,7 @@ export default function Chatrooms() {
     useEffect(() => {
         const user = ls('self')
         setLoggedInUser(user)
+        //eslint-disable-next-line
     }, [])
 
     const [groups, setGroups] = useState([]);
