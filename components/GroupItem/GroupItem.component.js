@@ -3,13 +3,20 @@ import { Badge, MailIcon, Typography, Avatar, ListItemAvatar, ListItemText, Divi
 import { joinChatroom } from '../../services';
 
 export default function GroupItem(props) {
-    const clickHandler = () => {
-        props.onChatroomSelected(props.id)
-    };
+
     const lastMessage = props.messages[props.messages.length - 1]
     const groupUsers = props.users;
+    const lastMessageUser = groupUsers.find(u => u.id === lastMessage?.userId);
+    const user = groupUsers.find(u => u.id === props.userId);
+    const userIsInGroup = !!user;
 
-    const userIsInGroup = groupUsers.find(u => u.id === props.userId);
+    const clickHandler = () => {
+        if (userIsInGroup) {
+            props.onChatroomSelected(props.id)
+        } else {
+            alert('make sure you join the chatroom first');
+        }
+    };
 
     return (
         <>
@@ -27,7 +34,7 @@ export default function GroupItem(props) {
                                 variant="body2"
                                 color="text.primary"
                             >
-                                {props.username || "milcab"}
+                                {lastMessageUser?.username}
                             </Typography>
                             {" "}
                             {lastMessage ? lastMessage.text : "no messages"}
@@ -36,11 +43,21 @@ export default function GroupItem(props) {
                                 props.messages.length > 0 &&
                                 <Badge badgeContent={props.messages.length} color="success" />
                             }
-                            {!userIsInGroup && (<Button onClick={() => {
-                                joinChatroom({
-                                    chatroomId: props.id, userId: props.userId
-                                }).then(props.onGroupJoined)
-                            }}>Join</Button>)}
+                            {!userIsInGroup && (
+                                <Button
+                                    variant="contained"
+                                    color="success"
+                                    onClick={(event) => {
+                                        event.stopPropagation()
+
+                                        joinChatroom({
+                                            chatroomId: props.id, userId: props.userId
+                                        }).then(props.onGroupJoined)
+                                    }}
+                                >
+                                    Join
+                                </Button>)
+                            }
 
                         </>
                     }

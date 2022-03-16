@@ -10,13 +10,18 @@ export default function NewMessage({ onSubmit, chatroomId, userId }) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        if (text) {
+            createNewMessage({
 
-        createNewMessage({
-
-            text, chatroomId, userId
-        })
-            .then(() => setText(""))
-            .then(onSubmit)
+                text, chatroomId, userId
+            })
+                .then(() => setText(""))
+                .then(onSubmit)
+        } else if (text.length > 250) {
+            alert('Wordy! make smaller than 250 characters dude!')
+        } else {
+            alert('seems like you forgot to type something')
+        }
     }
     return (
         <>
@@ -26,6 +31,7 @@ export default function NewMessage({ onSubmit, chatroomId, userId }) {
                     value={text}
                     label="new message"
                     className={styles.inputField}
+                    size="250"
                     onChange={
                         (event) => setText(event.target.value)
                     }
