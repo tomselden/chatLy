@@ -16,6 +16,9 @@ import styles from "../styles/chatrooms.module.css"
 import ls from 'local-storage'
 import _ from "lodash"
 
+import io from 'socket.io-client'
+let socket
+
 const ModalBoxStyle = {
     position: 'absolute',
     top: '50%',
@@ -63,10 +66,23 @@ export default function Chatrooms() {
 
     useEffect(() => {
         getChatrooms()
-        // setInterval(getChatrooms, 500)
+
     }, [])
 
-    console.log({ loggedInUser })
+    useEffect(() => socketInitializer(), [])
+
+    const socketInitializer = async () => {
+        await fetch('/api/socket');
+        socket = io()
+
+        socket.on('connect', () => {
+            console.log('connected')
+        })
+
+        socket.on('new-message-received', () => {
+            getChatrooms()
+        })
+    }
 
     return (
         <Container fluid className={styles.chatroomsContainer}>
@@ -116,7 +132,14 @@ export default function Chatrooms() {
                             <Messages messages={messages} users={users} userId={loggedInUser?.id} />
                         </div>
                         <div className={styles.newMessage}>
-                            <NewMessage onSubmit={getChatrooms} chatroomId={selectedGroupId} userId={loggedInUser?.id} />
+                            <NewMessage
+                                onSubmit={() => {
+                                    getChatrooms()
+                                    socket.emit('new-message')
+                                }}
+                                chatroomId={selectedGroupId}
+                                userId={loggedInUser?.id}
+                            />
                         </div>
                     </>}
                 </Col>
