@@ -1,7 +1,5 @@
 import Head from "next/head";
-import Image from "next/image";
 import styles from "../styles/chatrooms.module.css";
-import Chatrooms from "./chatrooms";
 import Link from "next/link";
 import { Button } from "@mui/material";
 import styled from "@emotion/styled";
