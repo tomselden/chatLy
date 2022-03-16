@@ -10,13 +10,16 @@ export default function NewMessage({ onSubmit, chatroomId, userId }) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        if (text) {
+            createNewMessage({
 
-        createNewMessage({
-
-            text, chatroomId, userId
-        })
-            .then(() => setText(""))
-            .then(onSubmit)
+                text, chatroomId, userId
+            })
+                .then(() => setText(""))
+                .then(onSubmit)
+        } else {
+            alert('seems like you forgot to type something')
+        }
     }
     return (
         <>
