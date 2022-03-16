@@ -53,5 +53,5 @@ export default function GroupItem(props) {
 
 export const GroupList = ({ groups, onChatroomSelected, userId, onGroupJoined }) =>
     <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-        {groups.map(groupData => <GroupItem {...groupData} onChatroomSelected={onChatroomSelected} userId={userId} onGroupJoined={onGroupJoined} />)}
+        {groups.map((groupData, index) => <GroupItem key={index} {...groupData} onChatroomSelected={onChatroomSelected} userId={userId} onGroupJoined={onGroupJoined} />)}
     </List>

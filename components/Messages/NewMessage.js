@@ -5,7 +5,7 @@ import { TextField, Button } from "@mui/material"
 import styles from "./Message.module.css"
 import { createNewMessage } from '../../services';
 
-export default function ({ onSubmit, chatroomId, userId }) {
+export default function NewMessage({ onSubmit, chatroomId, userId }) {
     const [text, setText] = useState('');
 
     const handleSubmit = (event) => {
