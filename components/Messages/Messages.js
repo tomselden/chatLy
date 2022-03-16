@@ -4,7 +4,7 @@ import { Stack } from '@mui/material';
 import { MessageLeft } from "./Message.left";
 import { MessageRight } from "./Message.right";
 
-export default function ({ messages = [], users = [], userId }) {
+export default function Messages({ messages = [], users = [], userId }) {
 
     return (<Stack gap={3} style={{ margin: 20 }}>
         {messages.map((message, index) => {
@@ -13,13 +13,12 @@ export default function ({ messages = [], users = [], userId }) {
             const user = users.find(u => u.id === message.userId)
             if (message.userId === userId) {
                 return (
-                    <MessageRight isLastMessage={isLastMessage} message={message} user={user} />
+                    <MessageRight key={index} isLastMessage={isLastMessage} message={message} user={user} />
                 )
             }
 
-
             return (
-                <MessageLeft isLastMessage={isLastMessage} message={message} user={user} />
+                <MessageLeft key={index} isLastMessage={isLastMessage} message={message} user={user} />
             )
         })}
     </Stack>)
