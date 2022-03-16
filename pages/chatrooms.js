@@ -57,9 +57,7 @@ export default function Chatrooms() {
         fetch('/api/chatrooms')
             .then(response => response.json())
             .then(data => {
-                if (!_.isEqual(groups, data.chatRooms)) {
-                    setGroups(data.chatRooms)
-                }
+                setGroups(data.chatRooms)
             })
             .catch(console.error)
     }

@@ -8,8 +8,9 @@ export default function GroupItem(props) {
     };
     const lastMessage = props.messages[props.messages.length - 1]
     const groupUsers = props.users;
-
-    const userIsInGroup = groupUsers.find(u => u.id === props.userId);
+    const lastMessageUser = groupUsers.find(u => u.id === lastMessage.userId);
+    const user = groupUsers.find(u => u.id === props.userId);
+    const userIsInGroup = !!user;
 
     return (
         <>
@@ -27,7 +28,7 @@ export default function GroupItem(props) {
                                 variant="body2"
                                 color="text.primary"
                             >
-                                {props.username || "milcab"}
+                                {lastMessageUser?.username}
                             </Typography>
                             {" "}
                             {lastMessage ? lastMessage.text : "no messages"}
