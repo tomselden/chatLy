@@ -1,10 +1,17 @@
 {
   "development": {
-    "username": "postgres",
-    "password": "Aclim0802",
-    "database": "chatly_development",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
+    "username": "tllapzlurflxam",
+    "password": "86829f620ac1b4ee0aa0665d004118dea8fc24158227d5676ce102f97cd178b4",
+    "database": "d7bafhrl4op1ik",
+    "host": "ec2-44-194-167-63.compute-1.amazonaws.com",
+    "port": 5432,
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
   },
   "test": {
     "username": "tllapzlurflxam",
@@ -12,7 +19,13 @@
     "database": "d7bafhrl4op1ik",
     "host": "ec2-44-194-167-63.compute-1.amazonaws.com",
     "port": 5432,
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
   },
   "production": {
     "username": "tllapzlurflxam",
@@ -20,6 +33,12 @@
     "database": "d7bafhrl4op1ik",
     "host": "ec2-44-194-167-63.compute-1.amazonaws.com",
     "port": 5432,
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
   }
 }
