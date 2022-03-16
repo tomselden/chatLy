@@ -1,23 +1,25 @@
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Stack } from '@mui/material';
 import { MessageLeft } from "./Message.left";
 import { MessageRight } from "./Message.right";
 
 export default function ({ messages = [], users = [], userId }) {
+
     return (<Stack gap={3} style={{ margin: 20 }}>
-
-        {messages.map((message) => {
+        {messages.map((message, index) => {
+            const lastIndex = messages.length - 1;
+            const isLastMessage = index === lastIndex;
             const user = users.find(u => u.id === message.userId)
-
             if (message.userId === userId) {
                 return (
-                    <MessageRight message={message} user={user} />
+                    <MessageRight isLastMessage={isLastMessage} message={message} user={user} />
                 )
             }
 
+
             return (
-                <MessageLeft message={message} user={user} />
+                <MessageLeft isLastMessage={isLastMessage} message={message} user={user} />
             )
         })}
     </Stack>)
