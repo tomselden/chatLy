@@ -3,14 +3,20 @@ import { Badge, MailIcon, Typography, Avatar, ListItemAvatar, ListItemText, Divi
 import { joinChatroom } from '../../services';
 
 export default function GroupItem(props) {
-    const clickHandler = () => {
-        props.onChatroomSelected(props.id)
-    };
+
     const lastMessage = props.messages[props.messages.length - 1]
     const groupUsers = props.users;
-    const lastMessageUser = groupUsers.find(u => u.id === lastMessage.userId);
+    const lastMessageUser = groupUsers.find(u => u.id === lastMessage?.userId);
     const user = groupUsers.find(u => u.id === props.userId);
     const userIsInGroup = !!user;
+
+    const clickHandler = () => {
+        if (userIsInGroup) {
+            props.onChatroomSelected(props.id)
+        } else {
+            alert('make sure you join the chatroom first');
+        }
+    };
 
     return (
         <>
