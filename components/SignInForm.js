@@ -5,40 +5,58 @@ import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { Container } from "react-bootstrap";
 import styled from "@emotion/styled";
 import { createUser, getUserByEmail } from "../services";
-import ls from 'local-storage'
+import ls from "local-storage";
+import AvatarLogo from "./AvatarLogo";
+import styles from "../styles/Home.module.css";
 
 const googleLogIn = async () => {
   const { user: gUser } = await signInWithPopup(auth, provider);
-  const existingUser = await getUserByEmail(gUser.email).then(response => response.json())
+  const existingUser = await getUserByEmail(gUser.email).then((response) =>
+    response.json()
+  );
   let loggedInUser;
   if (existingUser.user) {
     loggedInUser = existingUser;
   } else {
-    loggedInUser = (await createUser({
+    loggedInUser = await createUser({
       username: gUser.displayName,
       email: gUser.email,
-      avatarURL: gUser.photoURL
-    }).then(response => response.json()))
-
+      avatarURL: gUser.photoURL,
+    }).then((response) => response.json());
   }
-  ls('self', loggedInUser.user)
+  ls("self", loggedInUser.user);
 };
 
 function SignIn() {
   return (
-    <Container>
-      <Head>
-        <title>Login</title>
-      </Head>
-      <Welcome>
-        <h1>Welcome to ChatLy!</h1>
-      </Welcome>
-      <LoginContainer>
-        <Button style={{ height: "150px", width: "250px", bottom: "100px" }} onClick={() => googleLogIn()} variant="outlined">
-          Sign in with Google
-        </Button>
-      </LoginContainer>
-    </Container>
+    <body style={{ backgroundColor: "black" }}>
+      <Container style={{ backgroundColor: "black", alignItems: "center" }}>
+        <Head>
+          <title>Login</title>
+        </Head>
+        <Welcome style={{ backgroundColor: "black" }}>
+          <h1 style={{ color: "white", fontSize: "60px" }}>
+            Welcome to ChatLy!
+          </h1>
+        </Welcome>
+
+        <LoginContainer style={{ backgroundColor: "black" }}>
+          <Button
+            style={{
+              height: "100px",
+              width: "800px",
+              bottom: "400px",
+              fontSize: "25px",
+              backgroundColor: "lightblue",
+            }}
+            onClick={() => googleLogIn()}
+            variant="outlined"
+          >
+            Sign in with Google
+          </Button>
+        </LoginContainer>
+      </Container>
+    </body>
   );
 }
 
@@ -51,7 +69,6 @@ const LoginContainer = styled.div`
   align-items: center;
   background-color: white;
   border-radius: 5px;
-  box-shadow: 0px 4px 14px -3px rgba(0, 0, 0, 0.7); /* offset-x, offset-y, blur-radius, spread-radius, color */
 `;
 
 const Welcome = styled.h1`
