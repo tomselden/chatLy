@@ -43,11 +43,21 @@ export default function GroupItem(props) {
                                 props.messages.length > 0 &&
                                 <Badge badgeContent={props.messages.length} color="success" />
                             }
-                            {!userIsInGroup && (<Button onClick={() => {
-                                joinChatroom({
-                                    chatroomId: props.id, userId: props.userId
-                                }).then(props.onGroupJoined)
-                            }}>Join</Button>)}
+                            {!userIsInGroup && (
+                                <Button
+                                    variant="contained"
+                                    color="success"
+                                    onClick={(event) => {
+                                        event.stopPropagation()
+
+                                        joinChatroom({
+                                            chatroomId: props.id, userId: props.userId
+                                        }).then(props.onGroupJoined)
+                                    }}
+                                >
+                                    Join
+                                </Button>)
+                            }
 
                         </>
                     }

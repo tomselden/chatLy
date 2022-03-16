@@ -80,6 +80,12 @@ export default function Chatrooms() {
         socket.on('new-message-received', () => {
             getChatrooms()
         })
+        socket.on('new-group-created', () => {
+            getChatrooms()
+        })
+        socket.on('new-group-member', () => {
+            getChatrooms()
+        })
     }
 
     return (
@@ -104,6 +110,7 @@ export default function Chatrooms() {
                                 <AddNewGroupForm userId={loggedInUser?.id} onSubmit={() => {
                                     setIsModalOpen(false)
                                     getChatrooms();
+                                    socket.emit('new-group')
                                 }} />
                             </Box>
                         </Modal>
@@ -121,7 +128,10 @@ export default function Chatrooms() {
                         />
                     </div>
                     <div className={styles.groupList}>
-                        <GroupList groups={groups} onChatroomSelected={setSelectedGroupId} userId={loggedInUser?.id} onGroupJoined={getChatrooms} />
+                        <GroupList groups={groups} onChatroomSelected={setSelectedGroupId} userId={loggedInUser?.id} onGroupJoined={() => {
+                            getChatrooms()
+                            socket.emit('join-group')
+                        }} />
                     </div>
                 </Col>
                 <Col className={styles.rightPanel} xs={9}>
